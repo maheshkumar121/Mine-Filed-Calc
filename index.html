@@ -1,43 +1,394 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Mine Field Calculator</title>
-<link rel="stylesheet" href="~/Projects/mine-field-calculator/style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<title>MINE FD DESIGN</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#e5d2bf;
+margin:0;
+padding:0;
+}
+
+.header{
+background:#0b2c6b;
+color:white;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+padding:15px;
+}
+
+.container{
+width:700px;
+margin:auto;
+padding:20px;
+}
+
+table{
+border-collapse:collapse;
+margin-bottom:20px;
+}
+
+td{
+border:1px solid black;
+padding:6px 12px;
+}
+
+.section{
+margin-top:15px;
+}
+
+.red{
+color:red;
+font-weight:bold;
+}
+
+.green{
+color:green;
+font-weight:bold;
+}
+
+.blue{
+color:#1a5edb;
+font-weight:bold;
+}
+
+button{
+padding:10px 20px;
+background:#0b2c6b;
+color:white;
+border:none;
+cursor:pointer;
+margin-top:10px;
+}
+
+.result{
+float:right;
+font-weight:bold;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<h2>Mine Field Calculator</h2>
+<div class="header">
+MINE FD DESIGN
+</div>
 
-<label>Frontage</label>
-<input type="number" id="frontage">
+<div class="container">
 
-<label>Depth</label>
-<input type="number" id="depth">
 
-<label>A/Per</label>
-<input type="number" id="aper">
+<table>
 
-<label>A/Tank</label>
-<input type="number" id="atank">
+<tr>
+<td>Frontage</td>
+<td><input id="frontage"></td>
+</tr>
 
-<label>Frag</label>
-<input type="number" id="frag" step="0.01">
+<tr>
+<td>Depth</td>
+<td><input id="depth"></td>
+</tr>
 
-<button onclick="calculate()">Calculate</button>
+<tr>
+<td>A/Per</td>
+<td><input id="aper"></td>
+</tr>
 
-<h3>Results</h3>
+<tr>
+<td>A/Tank</td>
+<td><input id="atank"></td>
+</tr>
 
-<p>Perimeter : <span id="perimeter"></span></p>
-<p>Barbed Wire : <span id="wire"></span></p>
-<p>LAIP : <span id="laip"></span></p>
-<p>Transportation Lorry : <span id="lorry"></span></p>
+<tr>
+<td>Frag</td>
+<td><input id="frag"></td>
+</tr>
+
+</table>
+
+
+<button onclick="calculate()">CALCULATE</button>
+
+
+
+<div class="section red">
+1. TYPE OF STRIP
+</div>
+
+<div>
+(a). A/PER STRIP <span class="result" id="aperStrip"></span>
+</div>
+
+<div>
+(b). A/TANK STRIP <span class="result" id="atankStrip"></span>
+</div>
+
+<div>
+(c). TWO STRIP <span class="result" id="twoStrip"></span>
+</div>
+
+
+
+<div class="section blue">
+2. NO OF STRIP
+<span class="result" id="noStrip"></span>
+</div>
+
+
+
+<div class="section green">
+3. NO OF MINE
+</div>
+
+<div>
+(a). NMM-14 <span class="result" id="nmm14"></span>
+</div>
+
+<div>
+(b). ND MK-I <span class="result" id="ndmk1"></span>
+</div>
+
+<div>
+(c). M-16 <span class="result" id="m16"></span>
+</div>
+
+
+
+<div class="section red">
+4. MARKING STORES
+</div>
+
+<div>
+(a). Perimeter (Mtr) <span class="result" id="perimeter"></span>
+</div>
+
+<div>
+(b). Barbed Wire (Bundle) <span class="result" id="barbedWire"></span>
+</div>
+
+<div>
+(c). LAIP <span class="result" id="laip"></span>
+</div>
+
+<div>
+(d). Tri Perimeter Sign <span class="result" id="triSign"></span>
+</div>
+
+<div>
+(e). Binding Wire (kg) <span class="result" id="bindingWire"></span>
+</div>
+
+
+
+<div class="section blue">
+5. SETTING OUT STORES
+</div>
+
+<div>
+(a). Marked Tape (Reels) <span class="result" id="markedTape"></span>
+</div>
+
+<div>
+(b). Tapping Pin <span class="result" id="tappingPin"></span>
+</div>
+
+<div>
+(c). SAIP <span class="result" id="saip1"></span>
+</div>
+
+
+
+<div class="section green">
+6. NAVIGATION STORES
+</div>
+
+<div>
+(a). Unmarked Tape (Mtr) <span class="result" id="unmarkedTape"></span>
+</div>
+
+<div>
+(b). SAIP <span class="result" id="saip2"></span>
+</div>
+
+<div>
+(c). Night Sign Bd <span class="result" id="nightSign"></span>
+</div>
+
+
+
+<div class="section red">
+7. TRANSPORTATION
+</div>
+
+<div>
+(a). Mine Lorry <span class="result" id="mineLorry"></span>
+</div>
+
+<div>
+(b). Mkg,S-out & Navig <span class="result" id="mkgNav"></span>
+</div>
+
+<div>
+(c). Total <span class="result" id="totalTransport"></span>
+</div>
+
+
+
+<div class="section blue">
+8. TIME PLAN
+</div>
+
+<div>
+(a) Total No of MLP <span class="result" id="totalMLP"></span>
+</div>
+
+<div>
+<span class="result" id="finalMLP"></span>
+</div>
+
+
+</div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/mathjs@11/lib/browser/math.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/Projects/mine-field-calculator/script.js"></script>
+<script src="https://github.com/maheshkumar121/Mine-Filed-Calc/blob/main/script.js"></script>
 
+<script>
+function calculate(){
+
+let frontage = Number(document.getElementById("frontage").value);
+let depth = Number(document.getElementById("depth").value);
+let aper = Number(document.getElementById("aper").value);
+let atank = Number(document.getElementById("atank").value);
+let fragInput = document.getElementById("frag").value;
+let frag;
+debugger;
+if(fragInput.includes("/")){
+    let parts = fragInput.split("/");
+    frag = Number(parts[0]) / Number(parts[1]);
+}
+else{
+    frag = Number(fragInput);
+}
+
+/* -----------------------
+TYPE OF STRIP
+-----------------------*/
+
+let aperStrip = Math.round(aper/1);
+let atankStrip = Math.round(atank/0.3333333333333);
+let twoStrip = Math.round(frag/0.0833333333333);
+
+document.getElementById("aperStrip").innerText = aperStrip;
+document.getElementById("atankStrip").innerText = atankStrip;
+document.getElementById("twoStrip").innerText = twoStrip;
+
+
+/* -----------------------
+NO OF STRIP
+-----------------------*/
+
+let noStrip = Math.max(aperStrip,atankStrip,twoStrip);
+
+document.getElementById("noStrip").innerText = noStrip;
+
+
+/* -----------------------
+NO OF MINE
+-----------------------*/
+
+let nmm14 = Math.round(frontage * aper * 1.1);
+let ndmk1 = Math.round(frontage * atank * 1.1);
+let m16 = Math.round(frontage * frag * 1.1);
+
+document.getElementById("nmm14").innerText = nmm14;
+document.getElementById("ndmk1").innerText = ndmk1;
+document.getElementById("m16").innerText = m16;
+
+
+/* -----------------------
+MARKING STORES
+-----------------------*/
+
+let perimeter = (frontage  + depth) * 2;
+
+let barbedWire = Math.ceil(perimeter * 2 * 1.1 / 100,0);
+
+let laip = Math.ceil(perimeter / 12.5 * 1.1,0);
+
+let triSign = Math.ceil(perimeter / 50 * 1.1,0);
+debugger;
+let bindingWire = Math.round(triSign * 15 / 100,0) / 20;
+
+document.getElementById("perimeter").innerText = perimeter;
+document.getElementById("barbedWire").innerText = barbedWire;
+document.getElementById("laip").innerText = laip;
+document.getElementById("triSign").innerText = triSign;
+document.getElementById("bindingWire").innerText = bindingWire;
+
+
+/* -----------------------
+SETTING OUT STORES
+-----------------------*/
+
+
+let markedTape = Math.ceil(frontage * (1 + noStrip) * 1.1 / 365,0);
+let tappingPin = Math.ceil(frontage * (1 + noStrip) * 1.1 / 20);
+let saip = Math.ceil(frontage * 4 / 150 * (noStrip + 1) * 1.1,0);
+document.getElementById("markedTape").innerText = markedTape;
+document.getElementById("tappingPin").innerText = tappingPin;
+document.getElementById("saip1").innerText = saip;
+
+
+/* -----------------------
+NAVIGATION STORES
+-----------------------*/
+
+let unmarkedTape = Math.round((noStrip-1)*(frontage*1.1)+0,0);
+let saipNav = Math.round(unmarkedTape/50,0);
+let nightSign = Math.round(noStrip*2+8);
+
+document.getElementById("unmarkedTape").innerText = unmarkedTape;
+document.getElementById("saip2").innerText = saipNav;
+document.getElementById("nightSign").innerText = nightSign;
+
+
+/* -----------------------
+TRANSPORTATION
+-----------------------*/
+
+let mineLorry = Math.round((nmm14/8000)+(ndmk1/225)+(m16/700)*0,0);
+let mkgNav = Math.round((perimeter/4500,0)+1+1);
+let totalTransport = Math.round(mineLorry+mkgNav);
+
+document.getElementById("mineLorry").innerText = mineLorry;
+document.getElementById("mkgNav").innerText = mkgNav;
+document.getElementById("totalTransport").innerText = totalTransport;
+
+
+/* -----------------------
+TIME PLAN
+-----------------------*/
+
+let totalMLP = (nmm14+ndmk1+m16)/700;
+let finalMLP = Math.round(totalMLP+0,0);
+
+document.getElementById("totalMLP").innerText = totalMLP;
+document.getElementById("finalMLP").innerText = finalMLP;
+
+}
+</script>
 </body>
 </html>
