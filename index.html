@@ -390,5 +390,22 @@ document.getElementById("finalMLP").innerText = finalMLP;
 
 }
 </script>
+
+    <script>
+if ('serviceWorker' in navigator) {
+
+navigator.serviceWorker.register('service-worker.js')
+.then(function(registration) {
+
+console.log("Service Worker Registered");
+
+}).catch(function(error) {
+
+console.log("Service Worker Failed:", error);
+
+});
+
+}
+</script>
 </body>
 </html>
